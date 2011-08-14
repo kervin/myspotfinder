@@ -3,4 +3,6 @@
     <string name="hello">Hello World, index!</string>
     <string name="app_name">My SpotFinder</string>
     <string name="no_places">No places to display</string>
+    <string name="enterNameText">Please enter your Facebook Username:</string>
+    <string name="enter">Enter</string>
 </resources>
