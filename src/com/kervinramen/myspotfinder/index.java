@@ -1,81 +1,37 @@
 package com.kervinramen.myspotfinder;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.ByteArrayBuffer;
-
-import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
 
-public class index extends Activity {
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+public class index extends ListActivity {
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        listPlaces();
+    }
+    
+    @Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
 		
-		this.GetSpot();
-		
-		setContentView(R.layout.main);
+		//on click, open Google Maps Activity
+		Intent i = new Intent(this,  placesmap.class);
+		startActivity(i);
 	}
-
-	public String GetSpot() 
-	{
-		HttpResponse response = null;
-		
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpContext localContext = new BasicHttpContext();
-		HttpGet httpGet = new HttpGet("http://myspotfinder.appspot.com/find");
-		try {
-			response = httpClient.execute(httpGet, localContext);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return response.toString();
-		
-	}
-	public static String GetSpots(/*double latitude, double longitude*/) {
-		String str = null;
-		
-		try {
-			URL myURL = new URL("http://myspotfinder.appspot.com/find");
-			URLConnection conn = myURL.openConnection();
-
-			InputStream streamFromWS = conn.getInputStream();
-
-			BufferedInputStream bufferStream = new BufferedInputStream(
-					streamFromWS);
-
-			ByteArrayBuffer baf = new ByteArrayBuffer(50);
-			int current = 0;
-			while ((current = bufferStream.read()) != -1) {
-				baf.append((byte) current);
-			}
-
-			/* Convert the Bytes read to a String. */
-			str = new String(baf.toByteArray());
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-			str = ex.getMessage();
-		}
-
-		return str;
-	}
-
+    
+    
+    private void listPlaces()
+    {
+    	
+    	//getPlaces, display in list view
+    	
+		//SimpleCursorAdapter friends = new SimpleCursorAdapter(this, R.layout.place_row, notesCursor, from, to);
+    	//setListAdapter();
+    }
 }
