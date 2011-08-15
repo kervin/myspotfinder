@@ -34,8 +34,10 @@ public class index extends Activity{
 	
 	private void showListActivity()
 	{
+		String usernameText = txtUsername.getText().toString();
 		Intent i = new Intent(this, placeslist.class);
-		i.putExtra(placeslist.KEY_USERNAME, txtUsername.getText());
+		
+		i.putExtra("username", usernameText);
 		
 		startActivity(i);
 	}

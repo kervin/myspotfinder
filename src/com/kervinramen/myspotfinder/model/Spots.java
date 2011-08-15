@@ -40,15 +40,10 @@ public class Spots {
 
     private static Spots getSpotsFromXml(String xml) {
         Spots spots = null;
-       /* JAXBContext context;*/
-        try {
-//            context = JAXBContext.newInstance(Spots.class);
-//            Unmarshaller um = context.createUnmarshaller();
-//            spots = (Spots) um.unmarshal(new StreamSource(new StringReader(xml)));
-            
-            Serializer serializer = new Persister();
-           /* File source = new File("example.xml");*/
 
+        try {
+      
+            Serializer serializer = new Persister();
             spots = serializer.read(Spots.class, xml, false);
             
 

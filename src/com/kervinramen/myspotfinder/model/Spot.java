@@ -3,6 +3,9 @@ package com.kervinramen.myspotfinder.model;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 
 /**
  * This class stores the places that will have ratings on Spotfinder. 
@@ -15,7 +18,7 @@ import org.simpleframework.xml.Root;
  * 
  */
 @Root(name="spot")
-public class Spot {
+public class Spot implements Parcelable{
 
     @SuppressWarnings("unused")
     private String encodedKey;
@@ -94,5 +97,20 @@ public class Spot {
 
     public Spot() {
     }
+
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void writeToParcel(Parcel arg0, int arg1) {
+		// TODO Auto-generated method stub
+		arg0.writeLong(spotId);
+		arg0.writeString(name);
+		arg0.writeString(location);
+		arg0.writeString(description);
+		arg0.writeString(image);
+
+	}
     
 }
