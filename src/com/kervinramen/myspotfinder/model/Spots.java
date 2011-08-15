@@ -3,17 +3,22 @@ package com.kervinramen.myspotfinder.model;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.transform.stream.StreamSource;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+
+
+
 
 import com.kervinramen.myspotfinder.helpers.HttpHelper;
 
-@XmlRootElement
+@Root(name="spots")
 public class Spots {
-
-    public ArrayList<Spot> spot;
+	@ElementList(inline=true)
+    private ArrayList<Spot> spot;
 
     public ArrayList<Spot> getSpots() {
         return this.spot;
@@ -35,11 +40,17 @@ public class Spots {
 
     private static Spots getSpotsFromXml(String xml) {
         Spots spots = null;
-        JAXBContext context;
+       /* JAXBContext context;*/
         try {
-            context = JAXBContext.newInstance(Spots.class);
-            Unmarshaller um = context.createUnmarshaller();
-            spots = (Spots) um.unmarshal(new StreamSource(new StringReader(xml)));
+//            context = JAXBContext.newInstance(Spots.class);
+//            Unmarshaller um = context.createUnmarshaller();
+//            spots = (Spots) um.unmarshal(new StreamSource(new StringReader(xml)));
+            
+            Serializer serializer = new Persister();
+           /* File source = new File("example.xml");*/
+
+            spots = serializer.read(Spots.class, xml, false);
+            
 
         } catch (Exception e) {
             // TODO Auto-generated catch block

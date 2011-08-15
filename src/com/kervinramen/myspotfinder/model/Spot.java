@@ -1,5 +1,8 @@
 package com.kervinramen.myspotfinder.model;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
+
 
 /**
  * This class stores the places that will have ratings on Spotfinder. 
@@ -11,6 +14,7 @@ package com.kervinramen.myspotfinder.model;
  * @author Kervin Ramen
  * 
  */
+@Root(name="spot")
 public class Spot {
 
     @SuppressWarnings("unused")
@@ -20,29 +24,31 @@ public class Spot {
     /**
      * The long part of the key
      */
-  
+    @Element(required=false)
     private Long spotId;
     /** 
      * Name of the spot
      */
-   
+    @Element(required=false)
 	private String name;
 
 	/**
 	 * Gmaps location
 	 */
-   
+    @Element(required=false)
 	private String location;
 
 	/**
 	 * Some brief description
 	 */
+    @Element(required=false)
 	private String description;
 	
 	/** 
 	 * Image of the spot, 
 	 * place in /media/
 	 */
+    @Element(required=false)
 	private String image;
 
     

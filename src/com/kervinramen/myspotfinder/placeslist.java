@@ -32,7 +32,7 @@ public class placeslist extends ListActivity {
         }
         
         
-        listPlaces();
+        listPlaces(userName);
     }
     
     @Override
@@ -45,7 +45,7 @@ public class placeslist extends ListActivity {
 	}
     
     
-    private void listPlaces()
+    private void listPlaces(String username)
     {
     	
     	  // mRowId = (savedInstanceState == null) ? null :

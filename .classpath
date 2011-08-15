@@ -4,5 +4,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/workspace/simple-xml-2.6/jar/simple-xml-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
