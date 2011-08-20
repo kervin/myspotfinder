@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-   android:orientation="vertical" >
-  
-   <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="@string/enterNameText" />
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content"
+                android:padding="10px" >
+
+
+    <TextView android:id="@+id/label" 
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+             android:text="@string/enterNameText"/>
+
     <EditText android:id="@+id/userName"
-       android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-         />
-    
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+              android:layout_below="@id/label" />
+  
     <Button android:id="@+id/enter" 
-      android:text="@string/enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_below="@+id/userName"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10px"
+            android:text="OK" />
+
+    <Button android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/enter"
+            android:layout_alignTop="@+id/enter"
+            android:text="Cancel" />
+</RelativeLayout>

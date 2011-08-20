@@ -97,6 +97,18 @@ public class Spot implements Parcelable{
 
     public Spot() {
     }
+    
+    public Spot(Parcel source){
+        /*
+         * Reconstruct from the Parcel
+         */
+
+        this.spotId = source.readLong();
+        this.name = source.readString();
+        this.location = source.readString();
+        this.description = source.readString();
+        this.image = source.readString();
+  }
 
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -112,5 +124,17 @@ public class Spot implements Parcelable{
 		arg0.writeString(image);
 
 	}
+	
+	   public static final Parcelable.Creator<Spot> CREATOR
+       = new Parcelable.Creator<Spot>() {
+   public Spot createFromParcel(Parcel in) {
+       return new Spot(in);
+   }
+
+   public Spot[] newArray(int size) {
+       return new Spot[size];
+   }
+};
+
     
 }

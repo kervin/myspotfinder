@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, index!</string>
+    <string name="hello">Hello,</string>
     <string name="app_name">My SpotFinder</string>
     <string name="no_places">No places to display</string>
     <string name="enterNameText">Please enter your Facebook Username:</string>

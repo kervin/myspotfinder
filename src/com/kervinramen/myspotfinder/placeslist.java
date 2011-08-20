@@ -34,19 +34,19 @@ public class placeslist extends ListActivity {
 	RowData rd;
 	Drawable[] imgid;
 	String userName;
-	Spots spots ;
+	Spots spots;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		mInflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		
+
 		if (userName == null) {
-			//Bundle extras = getIntent().getExtras();
-			userName = getIntent().getStringExtra("username") ;
+			// Bundle extras = getIntent().getExtras();
+			userName = getIntent().getStringExtra("username");
 		}
 
 		listPlaces(userName);
@@ -60,56 +60,56 @@ public class placeslist extends ListActivity {
 		// on click, open Google Maps Activity
 		Intent i = new Intent(this, placesmap.class);
 		Bundle b = new Bundle();
-		b.putParcelable("selectedSpot", spot);
+		b.putParcelable("com.kervinramen.myspotfinder.model.spot", spot);
 		i.putExtras(b);
 		startActivity(i);
 	}
 
 	private void listPlaces(String username) {
 
-	
 		// mRowId = (savedInstanceState == null) ? null :
 		// (Long) savedInstanceState.getSerializable(SQLDbAdapter.KEY_ROWID);
 		data = new Vector<RowData>();
-		
+
 		// getPlaces
 		// TODO: Send username to Spots
 		spots = Spots.getSpotsFromWS();
 
-		//String[] spotNames = new String[spots.getSpots().size()];
+		if (spots != null) {
 
-		imgid = new Drawable[spots.getSpots().size()];
+			// String[] spotNames = new String[spots.getSpots().size()];
 
-		for (int i = 0; i < spots.getSpots().size(); i++) {
+			imgid = new Drawable[spots.getSpots().size()];
 
-			try {
-				rd = new RowData(i, spots.getSpots().get(i).getName(), spots
-						.getSpots().get(i).getDescription());
-			} catch (ParseException e) {
-				e.printStackTrace();
+			for (int i = 0; i < spots.getSpots().size(); i++) {
+
+				try {
+					rd = new RowData(i, spots.getSpots().get(i).getName(),
+							spots.getSpots().get(i).getDescription());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				data.add(rd);
+
+				String imageUrl = "http://myspotfinder.appspot.com/media/"
+						+ spots.getSpots().get(i).getImage();
+				Drawable drawable = getImageFromURL(this, imageUrl, spots
+						.getSpots().get(i).getImage());
+				imgid[i] = drawable;
+
 			}
-			data.add(rd);
 
-			
+			// display in list view
+			/*
+			 * setListAdapter(new ArrayAdapter<String>(this, R.layout.place_row,
+			 * R.id.text1, spotNames));
+			 */
 
-			String imageUrl = "http://myspotfinder.appspot.com/media/"
-					+ spots.getSpots().get(i).getImage();
-			Drawable drawable = getImageFromURL(this, imageUrl, spots
-					.getSpots().get(i).getImage());
-			imgid[i] = drawable;
-
+			CustomAdapter adapter = new CustomAdapter(this, R.layout.list,
+					R.id.title, data);
+			setListAdapter(adapter);
+			// getListView().setTextFilterEnabled(true);
 		}
-
-		// display in list view
-		/*
-		 * setListAdapter(new ArrayAdapter<String>(this, R.layout.place_row,
-		 * R.id.text1, spotNames));
-		 */
-
-		CustomAdapter adapter = new CustomAdapter(this, R.layout.list,
-				R.id.title, data);
-		setListAdapter(adapter);
-		//getListView().setTextFilterEnabled(true);
 
 	}
 
