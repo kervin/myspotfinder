@@ -7,9 +7,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Vector;
 
-import com.kervinramen.myspotfinder.model.Spot;
-import com.kervinramen.myspotfinder.model.Spots;
-
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
@@ -24,6 +21,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.kervinramen.myspotfinder.model.Spot;
+import com.kervinramen.myspotfinder.model.Spots;
 
 public class placeslist extends ListActivity {
 

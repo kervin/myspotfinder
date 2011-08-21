@@ -1,17 +1,11 @@
 package com.kervinramen.myspotfinder.model;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
-
-
-
-
 
 import com.kervinramen.myspotfinder.helpers.HttpHelper;
 
