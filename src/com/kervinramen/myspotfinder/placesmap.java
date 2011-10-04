@@ -19,101 +19,60 @@ import com.google.android.maps.OverlayItem;
 import com.kervinramen.myspotfinder.model.AndroidOverlayItems;
 import com.kervinramen.myspotfinder.model.Spot;
 
-public class placesmap extends MapActivity implements LocationListener {
+public class placesmap extends MapActivity {
 
-	LinearLayout linearLayout;
-	MapView mapView;
-	List<Overlay> mapOverlays;
-	Drawable drawable;
-	AndroidOverlayItems androidOverlay;
-	Geocoder coder;
-	LocationManager locationManager;
+    LinearLayout linearLayout;
+    MapView mapView;
+    List<Overlay> mapOverlays;
+    Drawable drawable;
+    AndroidOverlayItems androidOverlay;
+    Geocoder coder;
+    LocationManager locationManager;
 
-	MapController controller;
+    MapController controller;
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    protected boolean isRouteDisplayed() {
+        return false;
+    }
 
-	protected void onCreate(Bundle icicle) {
+    protected void onCreate(Bundle icicle) {
 
-		super.onCreate(icicle);
-		setContentView(R.layout.map);
-		
-		Bundle b = getIntent().getExtras();
-		Spot spot = b.getParcelable("com.kervinramen.myspotfinder.model.spot");
+        super.onCreate(icicle);
+        setContentView(R.layout.map);
 
-		mapView = (MapView) findViewById(R.id.mapview);
-		mapView.setBuiltInZoomControls(true);
-		controller = mapView.getController();
+        Bundle b = getIntent().getExtras();
+        Spot spot = b.getParcelable("com.kervinramen.myspotfinder.model.spot");
 
-		mapOverlays = mapView.getOverlays();
-		
-		drawable = this.getResources().getDrawable(R.drawable.androidmarker);
-		androidOverlay = new AndroidOverlayItems(drawable);
-		
-		mapOverlays.clear();
-		
-		String[] locationvalues = spot.getLocation().split(",");
-		
-		int latitudeE6 = (int) (Double.parseDouble(locationvalues[0]) * 1E6);
-		int longitudeE6 = (int) (Double.parseDouble(locationvalues[1]) * 1E6);
+        mapView = (MapView) findViewById(R.id.mapview);
+        mapView.setBuiltInZoomControls(true);
+        controller = mapView.getController();
 
-		GeoPoint point = new GeoPoint(latitudeE6,
-				longitudeE6);
-		OverlayItem overlayitem = new OverlayItem(point,
-				spot.getName(),
-				spot.getDescription());
+        mapOverlays = mapView.getOverlays();
 
-		androidOverlay.addOverlay(overlayitem);
-		
-		mapOverlays.add(androidOverlay);
-		
-		controller.setZoom(15);
-		controller.animateTo(point);
-		mapView.invalidate();
-		
-		
-		/*// Define a listener that responds to location updates
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		
-		
-		 String provider = null;
-	        if (locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-	            provider = LocationManager.GPS_PROVIDER ;
-	        } else {
-	            Toast.makeText(this, "GPS not available", 3000).show();
-	        }
-	        
-	        if(provider != null) {
-	        	locationManager.requestLocationUpdates(provider, 1000, 100, this);
-	        }*/
-	        
-	        
-	        
-	}
-	
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-	}
+        drawable = this.getResources().getDrawable(R.drawable.androidmarker);
+        androidOverlay = new AndroidOverlayItems(drawable);
 
-	public void onProviderEnabled(String provider) {
-	}
+        mapOverlays.clear();
 
-	public void onProviderDisabled(String provider) {
-	}
+        String[] locationvalues = spot.getLocation().split(",");
 
-	public void onLocationChanged(Location location) {
+        int latitudeE6 = (int) (Double.parseDouble(locationvalues[0]) * 1E6);
+        int longitudeE6 = (int) (Double.parseDouble(locationvalues[1]) * 1E6);
 
-		/*showLocationOnMap(location);
-		locationManager.removeUpdates(this);*/
-	}
-	
-	private void showLocationOnMap(Location location)
-	{
-		
-	}
-	
+        GeoPoint point = new GeoPoint(latitudeE6, longitudeE6);
+        OverlayItem overlayitem = new OverlayItem(point, spot.getName(), spot.getDescription());
+
+        androidOverlay.addOverlay(overlayitem);
+
+        mapOverlays.add(androidOverlay);
+
+        controller.setZoom(15);
+        controller.animateTo(point);
+        mapView.invalidate();
+
+
+    }
+
 
 }

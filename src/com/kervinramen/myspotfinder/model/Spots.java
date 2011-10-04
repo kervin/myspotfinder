@@ -9,9 +9,9 @@ import org.simpleframework.xml.core.Persister;
 
 import com.kervinramen.myspotfinder.helpers.HttpHelper;
 
-@Root(name="spots")
+@Root(name = "spots")
 public class Spots {
-	@ElementList(inline=true)
+    @ElementList(inline = true)
     private ArrayList<Spot> spot;
 
     public ArrayList<Spot> getSpots() {
@@ -25,10 +25,11 @@ public class Spots {
     public Spots() {
         this.setSpots(new ArrayList<Spot>());
     }
-    
-    public static Spots getSpotsFromWS() {
-        
-        String xml = HttpHelper.getStringResponse("http://myspotfinder.appspot.com/find");
+
+    public static Spots getSpotsFromWS(String username, Double lat, Double lng) {
+
+        String xml = HttpHelper.getStringResponse("http://myspotfinder.appspot.com/find" + "?id=" + username + "&lat="
+                + lat.toString() + "&lng=" + lng.toString());
         return getSpotsFromXml(xml);
     }
 
@@ -36,10 +37,9 @@ public class Spots {
         Spots spots = null;
 
         try {
-      
+
             Serializer serializer = new Persister();
             spots = serializer.read(Spots.class, xml, false);
-            
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
